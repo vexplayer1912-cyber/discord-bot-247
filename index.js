@@ -13,8 +13,8 @@ client.once("ready", () => {
 });
 
 client.on("ready", async () => {
-  const GUILD_ID = "COLOQUE_ID_DO_SERVIDOR";
-  const VOICE_CHANNEL_ID = "COLOQUE_ID_DA_CALL";
+  const GUILD_ID = "1462211324439167122";
+  const VOICE_CHANNEL_ID = "1462277982189129938";
 
   const guild = await client.guilds.fetch(GUILD_ID);
   const channel = guild.channels.cache.get(VOICE_CHANNEL_ID);
