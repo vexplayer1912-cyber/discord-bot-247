@@ -32,3 +32,14 @@ client.on("ready", async () => {
 });
 
 client.login(process.env.TOKEN);
+
+const http = require("http");
+
+const PORT = process.env.PORT || 8000;
+
+http.createServer((req, res) => {
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end("Bot online 24/7");
+}).listen(PORT, () => {
+  console.log("Servidor HTTP ativo na porta", PORT);
+});
