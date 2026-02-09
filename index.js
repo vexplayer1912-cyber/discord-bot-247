@@ -1,6 +1,16 @@
+const express = require("express");
+const app = express();
+
 const { Client, GatewayIntentBits } = require("discord.js");
 const { joinVoiceChannel } = require("@discordjs/voice");
-const http = require("http");
+
+app.get("/", (req, res) => {
+  res.send("Bot online 🚀");
+});
+
+app.listen(3000, () => {
+  console.log("🌐 Servidor HTTP ativo");
+});
 
 const client = new Client({
   intents: [
@@ -9,13 +19,9 @@ const client = new Client({
   ],
 });
 
-// 🔒 Keep-alive (IMPORTANTE pro Koyeb)
-http.createServer((req, res) => {
-  res.writeHead(200);
-  res.end("Bot online");
-}).listen(process.env.PORT || 3000);
+client.once("ready", () => {
+  console.log(`Bot ligado como ${client.user.tag}`);
 
-function connectToVoice() {
   const guild = client.guilds.cache.get(process.env.GUILD_ID);
   if (!guild) return console.log("❌ Guild não encontrada");
 
@@ -26,28 +32,9 @@ function connectToVoice() {
     channelId: channel.id,
     guildId: guild.id,
     adapterCreator: guild.voiceAdapterCreator,
-    selfDeaf: false,
-    selfMute: false,
   });
 
-  console.log("🎧 Bot conectado à call");
-}
-
-client.once("ready", () => {
-  console.log(`✅ Bot ligado como ${client.user.tag}`);
-  connectToVoice();
-});
-
-// 🔁 Se cair da call, volta
-client.on("voiceStateUpdate", (oldState, newState) => {
-  if (
-    oldState.member?.id === client.user.id &&
-    oldState.channelId &&
-    !newState.channelId
-  ) {
-    console.log("⚠️ Bot caiu da call, reconectando...");
-    setTimeout(connectToVoice, 3000);
-  }
+  console.log("🎧 Bot entrou na call");
 });
 
 client.login(process.env.TOKEN);
