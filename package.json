@@ -1,0 +1,18 @@
+{
+  "name": "discord-bot-247",
+  "version": "1.0.0",
+  "description": "Bot Discord 24/7 em call",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "20.x"
+  },
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "@discordjs/voice": "^0.17.0",
+    "libsodium-wrappers": "^0.7.10"
+  }
+}
